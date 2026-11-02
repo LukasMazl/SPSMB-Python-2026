@@ -57,7 +57,7 @@ def multiply_const(matrix, const):
 def multiply(matrix_a, matrix_b):
     mA, nA = size_of(matrix_a)
     mB, nB = size_of(matrix_b)
-    if nA == mB:
+    if nA != mB:
          raise ValueError(f"Matrix A and B can not be multiply.")
     result = zeros(mA, nB)
     for i in range(mA):
