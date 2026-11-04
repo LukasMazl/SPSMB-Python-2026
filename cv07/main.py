@@ -1,29 +1,17 @@
-from matrix import plus, zeros, eyes, format, T, multiply, replace_row, replace_collum, determinant
-
+from matrix import convolution
+from view import load, numpy_to_list, list_to_numpy, show
 
 if __name__ == "__main__":
-    matrix_a = [
-        [1, 2, 0],
-        [0, 1, 2],
-        [0, 1, 1]
+    kernel = [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0]
     ]
 
-    matrix_b = [
-        [0, 0, 1],
-        [0, 1, 0],
-        [1, 0, 0]
-    ]
-    
-    matrix_x = [
-        [2, 1],
-        [1, 2]
-    ]
+    image = load("C:\\Users\\mazl\\Desktop\\SPSMB-Python-2026\\cv07\\image.png")
+ 
+    img = numpy_to_list(image)
+    new_img = convolution(img, kernel)
+    np_img = list_to_numpy(new_img)
+    show(np_img)
 
-    #matrix_c = plus(matrix_a, matrix_b)
-
-    #   2, 1, 2
-    #   1, 2, 1
-    #   1, 1, 2
-
-    #format(T(matrix_c))
-    print(determinant(matrix_a))
