@@ -10,9 +10,10 @@ def zeros(m, n):
     return matrix_c
 
 def plus(matrix_a, matrix_b):
-    matrix_c = zeros(len(matrix_a), len(matrix_a[0]))
-    for i in range(len(matrix_c)):
-        for j in range(len(matrix_c[i])):
+    m, n = size_of(matrix_a)
+    matrix_c = zeros(m, n)
+    for i in range(m):
+        for j in range(n):
             matrix_c[i][j] = matrix_a[i][j] + matrix_b[i][j]
     return matrix_c        
 
@@ -134,9 +135,14 @@ def _get_value(matrix, x, y):
         return 0
 
 def _do_convolution(matrix, x, y, kernel):
-    return (_get_value(matrix, x - 1, y - 1) * kernel[0][0] + _get_value(matrix, x - 1, y) * kernel[0][1] + _get_value(matrix, x - 1, y + 1) * kernel[0][2]
-         + _get_value(matrix, x, y - 1) * kernel[1][0] + _get_value(matrix, x, y) * kernel[1][1] + _get_value(matrix, x, y + 1) * kernel[1][2]
-         + _get_value(matrix, x + 1, y - 1) * kernel[2][0] + _get_value(matrix, x + 1, y) * kernel[2][1] + _get_value(matrix, x + 1, y + 1) * kernel[2][2])
+    sum = 0
+    kernel_size = len(kernel)
+    center_index = kernel_size // 2
+    for i in range(0 - center_index, center_index + 1):
+        for j in range(0 - center_index, center_index + 1):
+            sum += _get_value(matrix, x + i, y + j) * kernel[i + center_index][j + center_index] 
+
+    return sum
 
 def convolution(matrix, kernel):
     m, n = size_of(matrix)
