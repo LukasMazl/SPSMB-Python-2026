@@ -87,3 +87,41 @@ def T(matrix):
          for j in range(n):
               result[j][i] = matrix[i][j]
     return result
+
+def replace_row(matrix, vector, index):
+    m, n = size_of(matrix)
+    result = zeros(m, n)
+    for i in range(m):
+         for j in range(n):
+              if i == index:
+                result[i][j] = vector[j] 
+              else:
+                result[i][j] = matrix[i][j]
+    return result
+
+                   
+
+def replace_collum(matrix, vector, index):
+     m, n = size_of(matrix)
+     result = zeros(m, n)
+     for i in range(m):
+        for j in range(n):
+         if j == index:
+            result[i][j] = vector[i] 
+         else:
+            result[i][j] = matrix[i][j]
+     return result
+
+def determinant(matrix):
+    m, n = size_of(matrix)
+    if m == 2 and n == 2:
+        return matrix[0][0] * matrix[1][1] - matrix[1][0] * matrix[0][1]
+    elif m == 3 and n == 3:
+        return (matrix[0][0] * matrix[1][1] * matrix[2][2] + 
+               matrix[1][0] * matrix[2][1] * matrix[0][2] + 
+               matrix[2][0] * matrix[0][1] * matrix[1][2] -
+               matrix[0][2] * matrix[1][1] * matrix[2][0] -
+               matrix[1][2] * matrix[2][1] * matrix[0][0]-
+               matrix[2][2] * matrix[0][1] * matrix[1][0])
+    else:
+        raise ValueError (f"Matice neni 2x2 nebo 3x3")

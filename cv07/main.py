@@ -1,4 +1,4 @@
-from matrix import plus, zeros, eyes, format, T, multiply
+from matrix import plus, zeros, eyes, format, T, multiply, replace_row, replace_collum, determinant
 
 
 if __name__ == "__main__":
@@ -13,6 +13,11 @@ if __name__ == "__main__":
         [0, 1, 0],
         [1, 0, 0]
     ]
+    
+    matrix_x = [
+        [2, 1],
+        [1, 2]
+    ]
 
     #matrix_c = plus(matrix_a, matrix_b)
 
@@ -21,4 +26,4 @@ if __name__ == "__main__":
     #   1, 1, 2
 
     #format(T(matrix_c))
-    format(multiply(matrix_a, matrix_b))
+    print(determinant(matrix_a))
