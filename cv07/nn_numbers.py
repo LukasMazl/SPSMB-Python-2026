@@ -1,5 +1,15 @@
 import matrix
+import math
+import random
 
+def sigmoid(x):
+    return 1 / (1 + math.exp(-x))
+
+def sigmoid_derivative_matrix(A):
+    return apply(
+        A,
+        lambda x: x * (1 - x)
+    )
 
 def forward(X, W1, B1, W2, B2):
 
@@ -12,7 +22,7 @@ def forward(X, W1, B1, W2, B2):
     return Z1, A1, Z2, A2
 
 
-def backward(X, Y, A1, A2, W2, learning_rate):
+def backward(X, Y, A1, A2, W1, B1, W2, B2, learning_rate):
 
     # Výstupní vrstva
     dZ2 = multiply_elementwise(
@@ -51,7 +61,9 @@ def train_step(X, Y, W1, B1, W2, B2, learning_rate):
 
     # BACKWARD
     W1, B1, W2, B2 = backward(
-        X, Y, A1, A2, W2, learning_rate
+        X, Y, A1, A2,
+        W1, B1, W2, B2,
+        learning_rate
     )
 
     return W1, B1, W2, B2
