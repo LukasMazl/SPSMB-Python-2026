@@ -1,3 +1,5 @@
+import random
+
 def zeros(m, n):
     """
     Function creates empty matrix
@@ -150,4 +152,35 @@ def convolution(matrix, kernel):
     for i in range(m):
         for j in range(n):
             result[i][j] = _do_convolution(matrix, i, j, kernel)
+    return result
+
+
+def multiply_elementwise(matrix_a, matrix_b):
+    m, n = size_of(matrix_a)
+
+    if size_of(matrix_a) != size_of(matrix_b):
+        raise ValueError("Matrices must have the same dimensions.")
+
+    result = zeros(m, n)
+
+    for i in range(m):
+        for j in range(n):
+            result[i][j] = matrix_a[i][j] * matrix_b[i][j]
+
+    return result
+
+def gen_random_matrix(m, n):
+    result = zeros(m, n)
+    for i in range(m):
+        for j in range(n):
+            result[i][j] = random.uniform(-0.01, 0.01)
+    return result
+
+def reshape(image):
+    result = zeros(256 * 256, 1)
+
+    for i in range(256):
+        for j in range(256):
+            result[i * 256 + j][0] = image[i][j]
+
     return result
